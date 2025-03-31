@@ -2,14 +2,17 @@
 
 namespace App\Models;
 
-use Illuminate\Support\Facades\Storage;
-
 class Taxa
 {
     public static function all()
     {
-        $path = 'json/taxas_instituicoes.json';
-        $json = Storage::get($path);
+        $path = base_path('resources/json/taxas_instituicoes.json');
+
+        if (!file_exists($path)) {
+            return [];
+        }
+
+        $json = file_get_contents($path);
         return json_decode($json, true);
     }
 }

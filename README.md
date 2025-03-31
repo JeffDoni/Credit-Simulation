@@ -1,66 +1,169 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 📊 Credit Simulation API
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Esta é uma API REST desenvolvida em Laravel com o objetivo de simular empréstimos usando arquivos `.json` como fonte de dados (substituindo o banco de dados tradicional).
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## ✅ Requisitos
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- PHP 8.1 ou superior
+- Composer
+- Laravel 12.x
+- WSL ou terminal configurado no Windows
+- Git
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## 🚀 Como iniciar o projeto
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### 1. Clone o repositório
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+```bash
+git clone https://github.com/seu-usuario/seu-repo.git
+cd seu-repo
+```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### 2. Instale as dependências do projeto
 
-## Laravel Sponsors
+Utilize o Composer para instalar todas as dependências do Laravel:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+```bash
+composer install
+```
 
-### Premium Partners
+Esse comando cria a pasta `vendor/` com todas as bibliotecas necessárias.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+---
 
-## Contributing
+### 3. Gere o arquivo `.env` e a chave da aplicação
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Crie seu próprio arquivo `.env` com base no arquivo de exemplo:
 
-## Code of Conduct
+```bash
+cp .env.example .env
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Agora, gere a chave da aplicação:
 
-## Security Vulnerabilities
+```bash
+php artisan key:generate
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Você verá a mensagem:
 
-## License
+```
+Application key set successfully.
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+> Isso insere automaticamente a variável `APP_KEY` no seu `.env`.
+
+---
+
+### 4. Inicie o servidor local do Laravel
+
+Execute:
+
+```bash
+php artisan serve
+```
+
+O terminal exibirá algo como:
+
+```
+Starting Laravel development server: http://127.0.0.1:8000
+```
+
+Você pode acessar a API no navegador ou via Postman no endereço:
+
+```
+http://127.0.0.1:8000
+```
+
+---
+
+## 📂 Estrutura de dados (substituindo banco de dados)
+
+Os dados utilizados pela API estão localizados em:
+
+```
+resources/json/
+```
+
+Arquivos incluídos:
+
+- `instituicoes.json`
+- `convenios.json`
+- `taxas_instituicoes.json`
+
+Esses arquivos funcionam como o "banco de dados" da aplicação.
+
+---
+
+## 📬 Endpoints disponíveis
+
+### 🔹 `GET /api/instituicoes`
+
+Retorna todas as instituições disponíveis.
+
+#### Exemplo de resposta:
+
+```json
+[
+  { "chave": "PAN", "valor": "Pan" },
+  { "chave": "OLE", "valor": "Ole" },
+  { "chave": "BMG", "valor": "Bmg" }
+]
+```
+
+---
+
+### 🔹 `GET /api/convenios`
+
+Retorna todos os convênios disponíveis.
+
+#### Exemplo de resposta:
+
+```json
+[
+  { "chave": "INSS", "valor": "INSS" },
+  { "chave": "FEDERAL", "valor": "Federal" },
+  { "chave": "SIAPE", "valor": "Siape" }
+]
+```
+
+---
+
+### 🔹 `POST /api/simulacao`
+
+Realiza a simulação de crédito com base nos dados fornecidos.
+
+#### Payload mínimo:
+
+```json
+{
+  "valor_emprestimo": 10000
+}
+```
+
+#### Payload completo (com filtros):
+
+```json
+{
+  "valor_emprestimo": 10000,
+  "instituicoes": ["BMG"],
+  "convenios": ["INSS"],
+  "parcela": 72
+}
+```
+
+#### Observações:
+- Se apenas `valor_emprestimo` for enviado, a API retorna simulações de **todas as instituições e convênios**.
+- Ao aplicar filtros (`instituicoes`, `convenios`, `parcela`), a API retorna apenas os resultados compatíveis.
+
+---
+
+## 📌 Observações
+
+- Nenhum banco de dados é utilizado
+- Os dados são lidos diretamente de arquivos `.json` em `resources/json/`
+- Ideal para desafios técnicos, protótipos ou estudos de API com Laravel

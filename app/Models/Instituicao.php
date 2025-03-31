@@ -2,13 +2,17 @@
 
 namespace App\Models;
 
-use Illuminate\Support\Facades\Storage;
-
 class Instituicao
 {
     public static function all()
-{
-    $json = Storage::get('json/instituicoes.json');
-    return json_decode($json, true);
-}
+    {
+        $path = base_path('resources/json/instituicoes.json');
+
+        if (!file_exists($path)) {
+            return [];
+        }
+
+        $json = file_get_contents($path);
+        return json_decode($json, true);
+    }
 }
